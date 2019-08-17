@@ -8,8 +8,14 @@ let app = express();
 
 let http = Http.create(app);
 
+// This is the same...
 App.get(app, ~path="/") @@
-Middleware.from((_, _) => Response.sendString("<h1>HELLO, REASON</h1>"));
+Middleware.from @@
+(_, _) => Response.sendString("<h1>HELLO, REASON</h1>");
+//... as this:
+// App.get(app, ~path="/") @@
+// Middleware.from( (_, _) => Response.sendString("<h1>HELLO, REASON</h1>"));
+
 
 Http.listen(http, port |> int_of_string, () =>
   print_endline("Listening at *:" ++ port)
